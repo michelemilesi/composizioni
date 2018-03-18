@@ -27,23 +27,29 @@ global = {
 
 right = \relative do'' {
   \global
-  la8 do, mi la do, mi la fa | sol do, mi sol do, mi la sol | 
+  la8 do, mi la do, mi la fa | sol do, mi sol do, mi la sol |
   la do, fa la do, fa la mi | sol do, mi sol do, mi sol la \bar "||"
-  mi4 fa8 sol4 la8 fa do
-  
+  do,4 fa8 mi4 fa8 sol la | mi4 sol8 la4 la8 sol fa |
+  la4  re,8 do4 re8 mi fa | mi4 sol8 la4 la8 sol fa |
+
 }
 
 left = \relative do' {
   \global
   <la, mi'>1 | <do sol'> | <la mi'>1 | <do sol'> \bar "||"
   la8 do mi la, do mi la, mi' | do mi sol do, mi sol do, sol'
-  
+  la,8 do mi la, do mi la, mi' | do mi sol do, mi sol do, sol'
 }
 
 bass = \relative do, {
   \global
   la4. la4. r8 do8 | do4. do4. r8 la8 | la4. la4. r8 do8 | do4. do4. r8 la8 \bar "||"
-  la4 la8 do4 mi8 do la
+  la4 la8 do4 mi8 re do | do4 do8 mi4 sol8 fa mi | la,4 la8 do4 mi8 re do | do4 do8 mi4 sol8 fa mi |
+}
+
+bodhran = \drummode {
+  tt4 tt8 tt4. tt4 | tt4 tt8 tt4. tt4 | tt4 tt8 tt4. tt4 | tt4 tt8 tt4. tt4
+  tt4 tt8 tt4. tt4 | tt4 tt8 tt4. tt4 | tt4 tt8 tt4. tt4 | tt4 tt8 tt4. tt4
 }
 
 pianoPart = \new PianoStaff \with {
@@ -71,10 +77,22 @@ bassPart = \new StaffGroup \with {
   } \bass
 >>
 
+bodhranPart = \new DrumStaff \with {
+  instrumentName = "Bd."
+  shortInstrumentName = "Bd."
+  midiInstrument = "taiko drum"
+  drumStyleTable = #percussion-style
+%  drumStyleTable = #(alist->hash-table percussion-style)
+} <<
+  \bodhran
+
+>>
+
 \score {
   <<
-    \pianoPart
+   \pianoPart
     \bassPart
+    \bodhranPart
   >>
   \layout { }
   \midi { }
